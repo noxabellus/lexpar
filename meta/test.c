@@ -41,7 +41,7 @@ int main () {
     result = lex_next_token(&lexer);
     LexSubstr sub = lex_substr(&lexer, result.first, result.last);
     printf("%s: %.*s\n", lex_token_name(result.kind), sub.length, sub.src);
-  } while (result.kind != 0);
+  } while (result.kind != LEX_NIL);
 
   return 0;
 }

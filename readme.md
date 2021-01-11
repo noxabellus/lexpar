@@ -17,6 +17,7 @@ Currently, only the lexer generator is fully functional. To use it you may run `
 
 ### Lexer definition syntax
 
+#### Rules
 Each kind of token your generated lexer will support is defined with a rule or set of rules. The basic syntax for these rules is as follows:
 ```
 rule_name = rule_pattern ;
@@ -32,7 +33,9 @@ rule_name = rule_pattern_a ;
 rule_name = rule_pattern_b ;
 ```
 
+The rule name `_` is a reserved word, any patterns bound to this rule will have their tokens discarded during lexing. This is useful for e.g. whitespace and comment stripping.
 
+#### Patterns
 The pattern syntax is mostly equivalent to regex with some limitations and modifications
 
 + Freestanding ascii characters are allowed, except whitespace and control characters (e.g. `[` must be escaped, because it begins a set)
@@ -82,5 +85,5 @@ do {
   result = lex_next_token(&lexer);
   LexSubstr sub = lex_substr(&lexer, result.first, result.last);
   printf("%s: %.*s\n", lex_token_name(result.kind), sub.length, sub.src);
-} while (result.kind != 0);
+} while (result.kind != LEX_NIL);
 ```
