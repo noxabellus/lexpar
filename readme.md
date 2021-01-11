@@ -33,14 +33,17 @@ rule_name = rule_pattern_b ;
 ```
 
 
-The pattern syntax is equivalent to regex with some limitations
+The pattern syntax is mostly equivalent to regex with some limitations and modifications
 
 + Freestanding ascii characters are allowed, except whitespace and control characters (e.g. `[` must be escaped, because it begins a set)
 
 + Whitespace is ignored unless escaped, typical escapes are accepted, and spaces are escaped with `\s`
 
++ Unicode escapes take the form `\u{}` with the interior of the `{}` containing 1 to 6 hexadecimal digits, inclusive. The resulting unicode character is not validated.
+  - e.g. `\u{1f499}` inserts a blue heart 💙
+
 + Characters enclosed in `[` `]` define sets of characters valid at a given position
-  - A leading `^` inverts the set (e.g. `[^\n]` matches everything but the newline character)
+  - A leading `^` inverts the set (e.g. `[^\n\r]` matches everything but the newline and carriage return characters)
   - The range syntax `A-Z` is supported
   - Standard escapes `\n` are supported
   - Unicode escapes `\u{1F4A9}` are supported
@@ -52,6 +55,10 @@ The pattern syntax is equivalent to regex with some limitations
   - `?` matches 0 or 1
   - `*` matches 0 or N
   - `+` matches 1 or N
+
++ Union operator `|` is provided:
+  - Unions bind tightly to the elements immediately proceeding and following them, for larger bindings the grouping operators must be used
+  - `a|b` matches the character a or the character b
 
 + `.` wildcard is not supported
 
