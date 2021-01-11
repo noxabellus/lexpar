@@ -48,8 +48,6 @@ The pattern syntax is mostly equivalent to regex with some limitations and modif
   - Standard escapes `\n` are supported
   - Unicode escapes `\u{1F4A9}` are supported
 
-+ Sequences of elements can be grouped with `(` `)`
-
 + Repetition modifiers are provided:
   - Modifiers bind only to the last proceeding element, for larger bindings the grouping operators must be used
   - `?` matches 0 or 1
@@ -58,7 +56,10 @@ The pattern syntax is mostly equivalent to regex with some limitations and modif
 
 + Union operator `|` is provided:
   - Unions bind tightly to the elements immediately proceeding and following them, for larger bindings the grouping operators must be used
-  - `a|b` matches the character a or the character b
+  - `a|b` matches the character "a" or the character "b"
+
++ Sequences of elements can be grouped with `(` `)`
+  - `(abc) | (xyz)` matches the full sequence "abc", or the full sequence "xyz"
 
 + `.` wildcard is not supported
 
